@@ -7,7 +7,7 @@ class AutorController {
             const listarAutores = await autor.find({}) 
             res.status(200).json(listarAutores) 
         } catch (erro) {
-            res.status(5000).json({ message: `${erro.message} - falaha na requisição`})
+            res.status(5000).json({ message: `${erro.message} - falha na requisição`})
         }
     }
 

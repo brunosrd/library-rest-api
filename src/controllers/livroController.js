@@ -8,7 +8,7 @@ class LivroController { // Define a classe LivroController que contém métodos 
             const listaLivros = await livro.find({}) //Utiliza método find do Mongoose para buscar todos os documentos na coleção de livros
             res.status(200).json(listaLivros) // Retorna a lista de livros com status 200 (OK)
         } catch (erro) {
-            res.status(5000).json({ message: `${erro.message} - falaha na requisição`})
+            res.status(5000).json({ message: `${erro.message} - falha na requisição`})
         }
     }
 
@@ -26,7 +26,9 @@ class LivroController { // Define a classe LivroController que contém métodos 
     // Método para cadastrar um novo livro
     static async cadastrarLivros (req, res) {
         const novoLivro = req.body
+        const novaEditora = req.boy
         try {
+            const editoraEncontrada = await editora.findById(novaEditora.editora)
             const autorEncontrado = await autor.findById(novoLivro.autor)
             const livroCompleto  = {  ...novoLivro, autor: { ...autorEncontrado._doc }}
             const livroCriado = await livro.create()

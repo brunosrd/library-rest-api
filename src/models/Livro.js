@@ -1,11 +1,12 @@
 import mongoose from "mongoose"
 import { autorSchema } from "./Autor.js"
+import { editoraSchema } from "./Editora.js";
 
 // Define o esquema (schema) para o modelo de Livro
 const livroSchema = new mongoose.Schema ({
     id: { type: mongoose.Schema.Types.ObjectId }, // Campo 'id' do tipo ObjectId do Mongoose
     titulo: { type: String, required: true }, // Campo 'titulo' do tipo String, obrigatório
-    editora: { type: String }, 
+    editora: editoraSchema, 
     preco: { type: Number }, 
     paginas: { type: Number },
     autor: autorSchema 
