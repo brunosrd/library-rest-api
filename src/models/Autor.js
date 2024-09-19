@@ -7,7 +7,7 @@ const autorSchema = new mongoose.Schema({
   nacionalidade: { type: String }
 }, { versionKey: false });
 
-//criar modelo primeiro argumento string e segunda objeto 
+
 const autor = mongoose.model("autores", autorSchema);
 
 export { autor, autorSchema };
