@@ -10,9 +10,8 @@ Livraria com sistema de cadastro e manejo de livros, autores e editoras.
 
 ## Stack utilizada
 
-* `Node.js` v16.14.2
-* `express` v4.18.1,
-* `knex` v2.1.0
+* `Node.js` v20.11.1
+* `express` v4.21.0,
 * `sqlite3` v5.0.8
 
 
