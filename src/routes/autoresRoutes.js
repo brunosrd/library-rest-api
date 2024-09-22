@@ -5,6 +5,7 @@ const routes = express.Router(); //Cria um objeto Router do Express para armazen
 
 routes.get("/autor", AutorController.listarAutores)
 routes.get("/autor/:id", AutorController.listarAutorPorId)
+routes.get('/autor/:id/livros', AutorController.listarLivrosPorAutor)
 routes.post("/autor", AutorController.cadastrarAutor)
 routes.put("/autor/:id", AutorController.atualizarAutor)
 routes.delete("/autor/:id", AutorController.deletarAutor)

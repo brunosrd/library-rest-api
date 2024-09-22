@@ -1,7 +1,9 @@
 import express from 'express'
 import conectaNaDataBase from './config/dbConnect.js'
 import routes from "../src/routes/index.js"
+import dotenv from 'dotenv';
 
+dotenv.config();
 const conexao = await conectaNaDataBase()
 
 conexao.on("error", (erro) => {

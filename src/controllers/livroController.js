@@ -1,5 +1,7 @@
 import livro from "../models/Livro.js";
 import { autor } from "../models/Autor.js"
+import { editora } from "../models/Editora.js"
+
 
 class LivroController { // Define a classe LivroController que contém métodos estáticos para realizar operações CRUD
     // Método para listar todos os livros
@@ -8,7 +10,7 @@ class LivroController { // Define a classe LivroController que contém métodos 
             const listaLivros = await livro.find({}) //Utiliza método find do Mongoose para buscar todos os documentos na coleção de livros
             res.status(200).json(listaLivros) // Retorna a lista de livros com status 200 (OK)
         } catch (erro) {
-            res.status(5000).json({ message: `${erro.message} - falha na requisição`})
+            res.status(500).json({ message: `${erro.message} - falha na requisição`})
         }
     }
 
@@ -19,22 +21,26 @@ class LivroController { // Define a classe LivroController que contém métodos 
             const livroEncontrado = await livro.findById(id) //Utiliza método findById do Mongoose para buscar o livro pelo ID
             res.status(200).json(livroEncontrado)
         } catch (erro) {
-            res.status(5000).json({ message: `${erro.message} - Falha na requisição do livro`})
+            res.status(500).json({ message: `${erro.message} - Falha na requisição do livro`})
         }
     }
 
     // Método para cadastrar um novo livro
     static async cadastrarLivros (req, res) {
         const novoLivro = req.body
-        const novaEditora = req.boy
+        const novaEditora = req.body
         try {
             const editoraEncontrada = await editora.findById(novaEditora.editora)
             const autorEncontrado = await autor.findById(novoLivro.autor)
-            const livroCompleto  = {  ...novoLivro, autor: { ...autorEncontrado._doc }}
-            const livroCriado = await livro.create()
-            res.status(201).json({ message: "Criado livro com sucesso", livro: novoLivro})
+            const livroCompleto  = {  
+                ...novoLivro, 
+                autor: { ...autorEncontrado._doc }, 
+                editora: { ...editoraEncontrada._doc }            
+            }
+            const livroCriado = await livro.create(livroCompleto)
+            res.status(201).json({ message: "Criado livro com sucesso", livro: livroCriado})
         } catch (erro) {
-            res.status(5000).json({ message: `${erro.message} - falha ao cadastrar livro`})
+            res.status(500).json({ message: `${erro.message} - falha ao cadastrar livro`})
         }
     }
 
@@ -45,7 +51,7 @@ class LivroController { // Define a classe LivroController que contém métodos 
             await livro.findByIdAndUpdate(id, req.body) //Utiliza método findByIdAndUpdate do Mongoose para atualizar o livro pelo ID
             res.status(200).json({ message: "Livro atualizado"})
         } catch (erro) {
-            res.status(5000).json({ message: `${erro.message} - Falha na atualização`})
+            res.status(500).json({ message: `${erro.message} - Falha na atualização`})
         }
     }
 
@@ -56,7 +62,17 @@ class LivroController { // Define a classe LivroController que contém métodos 
             await livro.findByIdAndDelete(id) // Utiliza o método findByIdAndDelete do Mongoose para deletar o livro pelo ID
             res.status(200).json({ message: "Livro deletado com sucesso"})
         } catch (erro) {
-            res.status(5000).json({ message: `${erro.message} - Falha na exclusão do livro`})
+            res.status(500).json({ message: `${erro.message} - Falha na exclusão do livro`})
+        }
+    }
+
+    static async listarLivrosPorEditora(req, res) {
+        const editora = req.query.editora
+        try {
+            const livrosPorEditora = await livro.find({ "editora.nome": editora });
+            res.status(200).json(livrosPorEditora)
+        } catch (erro) {
+            res.status(500).json({ message: `${erro.message} - Falha na busca`})
         }
     }
 
