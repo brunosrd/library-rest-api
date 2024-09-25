@@ -82,20 +82,20 @@ A API expõe os seguintes *endpoints* a partir da *base URL* `localhost:3000`:
 * `DELETE /livros/:id`
 
 `/autores`
-* `GET /autores`
-* `GET /autores/:id`
-* `GET /autores/:id/livros`
-* `POST /autores`
-* `PUT /autores/:id`
-* `DELETE /autores/:id`
+* `GET /autor`
+* `GET /autor/:id`
+* `GET /autor/:id/livros`
+* `POST /autor`
+* `PUT /autor/:id`
+* `DELETE /autor/:id`
 
 `/editoras`
-* `GET /editoras`
-* `GET /editoras/:id`
-* `GET /editoras/:id/livros`
-* `POST /editoras`
-* `PUT /editoras/:id`
-* `DELETE /editoras/:id`
+* `GET /editora`
+* `GET /editora/:id`
+* `GET /editora/:id/livros`
+* `POST /editora`
+* `PUT /editora/:id`
+* `DELETE /editora/:id`
 
 
 ## Roadmap
